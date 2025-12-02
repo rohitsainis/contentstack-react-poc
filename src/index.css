@@ -24,27 +24,10 @@ a:hover {
 
 body {
   margin: 0;
+  display: flex;
+  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-}
-
-/* Ensure React app stretches full width */
-#root {
-  width: 100%;
-  min-height: 100vh;
-}
-
-/* Responsive helper for hero */
-@media (max-width: 768px) {
-  .hero-inner {
-    flex-direction: column !important;
-    text-align: center !important;
-  }
-
-  .hero-inner img {
-    margin-top: 24px;
-  }
 }
 
 h1 {
