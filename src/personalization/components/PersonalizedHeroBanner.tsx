@@ -3,8 +3,8 @@ import { useHeroBanner } from '../hooks/useHeroBanner';
 import { mapHeroBannerEntryToViewModel } from '../mappers/mapHeroBanner';
 
 type PersonalizedHeroBannerProps = {
-  contentTypeUid: string;
-  entryUid: string;
+  contentTypeUid: string; // hero content type uid
+  entryUid: string;       // hero entry uid
 };
 
 export const PersonalizedHeroBanner: React.FC<PersonalizedHeroBannerProps> = ({
@@ -29,12 +29,15 @@ export const PersonalizedHeroBanner: React.FC<PersonalizedHeroBannerProps> = ({
   return (
     <section
       style={{
+        width: '100%',
+        boxSizing: 'border-box',
         padding: '80px 60px',
-        backgroundColor: vm.backgroundColor || '#7d2dcd',
+        backgroundColor: vm.backgroundColor || '#0046ad',
         color: vm.textColor || '#ffffff',
       }}
     >
       <div
+        className="hero-inner"
         style={{
           maxWidth: 1200,
           margin: '0 auto',
@@ -42,10 +45,25 @@ export const PersonalizedHeroBanner: React.FC<PersonalizedHeroBannerProps> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '40px',
+          flexWrap: 'wrap',
         }}
       >
-        {/* Left section */}
-        <div style={{ flex: 1, maxWidth: '60%' }}>
+        {/* LEFT SIDE */}
+        <div style={{ flex: 1, maxWidth: '600px' }}>
+          {vm.subtitle && (
+            <p
+              style={{
+                fontSize: '0.9rem',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                marginBottom: '0.75rem',
+                opacity: 0.9,
+              }}
+            >
+              {vm.subtitle}
+            </p>
+          )}
+
           <h1
             style={{
               fontSize: '3rem',
@@ -57,22 +75,20 @@ export const PersonalizedHeroBanner: React.FC<PersonalizedHeroBannerProps> = ({
             {vm.title}
           </h1>
 
-          {vm.subtitle && (
+          {vm.description && (
             <p
               style={{
-                fontSize: '1.1rem',
+                fontSize: '1.15rem',
                 lineHeight: 1.6,
-                marginBottom: '2rem',
+                marginBottom: '0',
               }}
             >
-              {vm.subtitle}
+              {vm.description}
             </p>
           )}
-
-          {/* CTA removed */}
         </div>
 
-        {/* Right image */}
+        {/* RIGHT SIDE IMAGE */}
         {vm.backgroundImageUrl && (
           <div style={{ flex: 1, textAlign: 'right' }}>
             <img
