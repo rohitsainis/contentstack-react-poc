@@ -68,6 +68,13 @@ export const PersonalizedHeroBanner: React.FC<PersonalizedHeroBannerProps> = ({
               {vm.subtitle}
             </p>
           )}
+          {vm.descriptionHtml && (
+            <div
+              style={{ marginTop: 12 }}
+              // description is HTML from CMS
+              dangerouslySetInnerHTML={{ __html: vm.descriptionHtml }}
+            />
+          )}
 
           {/* CTA removed */}
         </div>

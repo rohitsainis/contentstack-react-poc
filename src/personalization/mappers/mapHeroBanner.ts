@@ -1,6 +1,9 @@
+// src/personalization/mappers/mapHeroBanner.ts
+
 export type HeroBannerViewModel = {
   title: string;
   subtitle?: string;
+  descriptionHtml?: string;
   backgroundImageUrl?: string;
   backgroundColor?: string;
   textColor?: string;
@@ -10,28 +13,27 @@ export type HeroBannerViewModel = {
 
 export function mapHeroBannerEntryToViewModel(entry: any): HeroBannerViewModel {
   if (!entry) {
-    return { title: '' };
-  }
-
-  // 1. Try to find hero_banner inside page_components
-  const components = entry.page_components || [];
-  const heroWrapper = components.find((c: any) => c.hero_banner);
-  const hero = heroWrapper?.hero_banner;
-
-  // 2. If no hero_banner modular block found, fall back to something basic
-  if (!hero) {
     return {
-      title: entry.title || '',
+      title: "",
+      subtitle: "",
+      descriptionHtml: "",
+      backgroundImageUrl: "",
+      backgroundColor: "#001f3f",
+      textColor: "#ffffff",
+      ctaLabel: "",
+      ctaUrl: "#",
     };
   }
 
   return {
-    title: hero.banner_title || '',
-    subtitle: hero.banner_description || '',
-    backgroundImageUrl: hero.banner_image?.url,
-    backgroundColor: hero.bg_color || '#7d2dcd',
-    textColor: hero.text_color || '#ffffff',
-    ctaLabel: hero.call_to_action?.title || '',
-    ctaUrl: hero.call_to_action?.href || '#',
+    title: entry.title || "",
+    subtitle: entry.subtitle || "",
+    descriptionHtml: entry.description || "", // rich text HTML from CMS
+    backgroundImageUrl: entry.background_image?.url || "",
+    backgroundColor: entry.background_color || "#001f3f",
+    textColor: "#ffffff", // you can add a field in CMS later if needed
+    // no CTA fields in your JSON yet – keep undefined for now
+    ctaLabel: undefined,
+    ctaUrl: undefined,
   };
 }
