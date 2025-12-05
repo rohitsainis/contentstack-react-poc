@@ -1,28 +1,26 @@
-// src/App.tsx
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { PersonalizedHeroBanner, resolveVariant } from 'cs-hero-banner-component';
 
-import React from 'react';
-import { PersonalizedHeroBanner } from './personalization/components/PersonalizedHeroBanner';
-import { resolveVariant } from './personalization/resolveVariant';
+function App() {
+  const [count, setCount] = useState(0)
 
-// This is your hero content type and base (Traveler) entry UID
-const HERO_CONTENT_TYPE_UID = 'herobanner';
-const FALLBACK_HERO_ENTRY_UID = 'blt299367f0c8134855';
-
-// Any string is fine here for now; we only log it
-const HERO_EXPERIENCE_ID = 'homepage_hero';
-
-const App: React.FC = () => {
   return (
-    <div>
+    <>
       <PersonalizedHeroBanner
-        experienceId={HERO_EXPERIENCE_ID}
-        contentTypeUid={HERO_CONTENT_TYPE_UID}
-        fallbackEntryUid={FALLBACK_HERO_ENTRY_UID}
-        travelType="Economy" // 👈 now controlled from UI
+        experienceId={import.meta.env.VITE_CS_HERO_EXPERIENCE_UID}
+        contentTypeUid={import.meta.env.VITE_CS_HERO_CONTENT_TYPE_UID}
+        fallbackEntryUid={import.meta.env.VITE_CS_HERO_FALLBACK_UID}
+        travelType="Budget"
         resolveVariant={resolveVariant}
       />
-    </div>
-  );
-};
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
+}
 
-export default App;
+export default App

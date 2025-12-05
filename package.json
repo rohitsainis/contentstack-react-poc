@@ -1,11 +1,8 @@
 {
-  "name": "cs-hero-banner-component",
-  "private": false,
-  "version": "0.1.0",
+  "name": "my-react-app",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
-  "main": "./src/index.ts",
-"module": "./src/index.ts",
-"types": "./src/index.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -13,8 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@contentstack/personalize-edge-sdk": "^1.0.19",
-    "contentstack": "^3.26.2",
+    "cs-hero-banner-component": "github:rohitsainis/cs-Hero-Banner-Component",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -31,10 +27,5 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4"
-  },
-  "peerDependencies": {
-  "react": ">=18",
-  "react-dom": ">=18"
-}
-
+  }
 }
