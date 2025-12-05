@@ -1,15 +1,14 @@
-# Contentstack Hero Banner Component (POC)
+# Contentstack Personalized Hero Banner Component (POC)
 
-This repository contains a reusable **React wrapper component** for rendering a **Hero Banner** from Contentstack.
-UI developers can install it directly from GitHub and use it without writing Contentstack Delivery API calls or parsing JSON.
+This repository contains a reusable **React wrapper component** for rendering a **Hero Banner** from Contentstack.  
+UI developers can install it directly from GitHub and use it without writing Contentstack Delivery API calls, Personalize Edge API calls, or parsing JSON.
 
 This POC currently supports:
 
-* Contentstack Delivery SDK integration
-* Rendering a Hero Banner from a single entry
-* Plug‑and‑play usage via `<PersonalizeProvider />` and `<PersonalizedHeroBanner />`
-
-Personalization (Contentstack Personalize Edge SDK) will be added later.
+* Contentstack Delivery SDK integration  
+* Rendering a Hero Banner (base or personalized variant)  
+* Plug-and-play usage via `<PersonalizeProvider />` and `<PersonalizedHeroBanner />`  
+* Passing `travelType` from the UI to fetch personalized variants
 
 ---
 
@@ -103,14 +102,17 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 Example `HomePage.tsx`:
 
 ```tsx
-import { PersonalizedHeroBanner } from 'cs-hero-banner-component';
+import { PersonalizedHeroBanner, resolveVariant } from 'cs-hero-banner-component';
 
 export default function HomePage() {
   return (
     <div>
       <PersonalizedHeroBanner
+        experienceId={import.meta.env.VITE_CS_HERO_EXPERIENCE_UID}
         contentTypeUid={import.meta.env.VITE_CS_HERO_CONTENT_TYPE_UID}
-        entryUid={import.meta.env.VITE_CS_HERO_ENTRY_UID}
+        fallbackEntryUid={import.meta.env.VITE_CS_HERO_FALLBACK_UID}
+        travelType="luxury"
+        resolveVariant={resolveVariant}
       />
 
       <div style={{ padding: 24 }}>
@@ -132,8 +134,6 @@ Once everything is configured:
 npm run dev
 ```
 
-If the Contentstack values are correct, the hero banner will render successfully.
+If the Contentstack values and `travelType` match your Personalize setup, the personalized hero banner will render successfully.
 
 ---
-
-
