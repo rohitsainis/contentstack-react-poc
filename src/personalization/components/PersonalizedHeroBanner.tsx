@@ -1,17 +1,35 @@
+// src/personalization/components/PersonalizedHeroBanner.tsx
+
 import React from 'react';
-import { useHeroBanner } from '../hooks/useHeroBanner';
 import { mapHeroBannerEntryToViewModel } from '../mappers/mapHeroBanner';
+import { usePersonalizedHeroBanner } from '../hooks/usePersonalizedHeroBanner';
+import type {
+  PersonalizeVariantResolver,
+  TravelType,
+} from '../personalizeTypes';
 
 type PersonalizedHeroBannerProps = {
+  experienceId: string;
   contentTypeUid: string;
-  entryUid: string;
+  fallbackEntryUid: string;
+  resolveVariant?: PersonalizeVariantResolver;
+  travelType?: TravelType;
 };
 
 export const PersonalizedHeroBanner: React.FC<PersonalizedHeroBannerProps> = ({
+  experienceId,
   contentTypeUid,
-  entryUid,
+  fallbackEntryUid,
+  resolveVariant,
+  travelType,
 }) => {
-  const { entry, loading, error } = useHeroBanner({ contentTypeUid, entryUid });
+  const { entry, loading, error } = usePersonalizedHeroBanner({
+    experienceId,
+    contentTypeUid,
+    fallbackEntryUid,
+    resolveVariant,
+    travelType,
+  });
 
   if (loading) {
     return <div>Loading hero...</div>;
@@ -68,6 +86,7 @@ export const PersonalizedHeroBanner: React.FC<PersonalizedHeroBannerProps> = ({
               {vm.subtitle}
             </p>
           )}
+
           {vm.descriptionHtml && (
             <div
               style={{ marginTop: 12 }}
@@ -75,8 +94,6 @@ export const PersonalizedHeroBanner: React.FC<PersonalizedHeroBannerProps> = ({
               dangerouslySetInnerHTML={{ __html: vm.descriptionHtml }}
             />
           )}
-
-          {/* CTA removed */}
         </div>
 
         {/* Right image */}
